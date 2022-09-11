@@ -7,7 +7,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PemilihController;
 use App\Http\Controllers\API\PemilihanController;
 use App\Http\Controllers\API\PeriodeController;
-use App\Http\Controllers\API\CalonKadesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('v1')->group(function () {
         Route::get('keluar', [AuthController::class, 'keluar']);
         Route::get('calon-kepala-desa', [PeriodeController::class, 'calonKadesPeriode']);
-        Route::get('calon-kepala-desa/{id}', [CalonKadesController::class, 'calonKades']);
+        Route::get('calon-kepala-desa/{id}', [App\Http\Controllers\API\CalonKadesController::class, 'calonKades']);
         Route::get('periode-aktif', [PeriodeController::class, 'periodeAktif']);
         Route::post('pemilihan', [PemilihanController::class, 'pilih']);
         Route::get('pemilihan-check', [PemilihanController::class, 'checkPemilihan']);
