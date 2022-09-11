@@ -18,9 +18,9 @@ class PeriodeService
                 ->join('calon_kepala_desa AS cd', 'kp.calon_kades_id', 'cd.id')
                 ->select(
                     [
-                        'kp.id',
+                        'cd.id',
                         'kp.nomor_urut',
-                        'cd.id as id_calon_kades',
+                        'kp.id as id_calkades_periode',
                         'cd.nama',
                         'cd.moto',
                         // DB::raw('CONCAT("' . env('APP_URL') . '", cd.foto) AS foto'),
