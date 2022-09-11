@@ -84,7 +84,7 @@
                     <td>{{ $item->nama }}</td>
                     <td>{{ $item->moto }}</td>
                     <td>{{ $item->jumlah_suara }}</td>
-                    <td>{{ $item->jumlah_suara / $terverifikasi * 100 }}%</td>
+                    <td>{{ $terverifikasi != 0 ? ($item->jumlah_suara / $terverifikasi * 100) : 0 }}%</td>
                     @endforeach
                 </tbody>
             </table>
