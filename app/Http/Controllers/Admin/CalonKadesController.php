@@ -12,7 +12,6 @@ class CalonKadesController extends Controller
     public function index(){
         $calonKades = CalonKadesService::calonKades();
         $data['calonKades'] = $calonKades['data'];
-        dd($data);
         return view('admin.calon-kepala-desa.index', $data);
     }
 
