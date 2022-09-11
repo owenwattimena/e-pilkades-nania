@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $date = date('y-m-d h:m:s');
+        $date = date('Y-m-d h:m:s');
         DB::table('users')
             ->insert([
                 "name" => "Owen Wattimena",
