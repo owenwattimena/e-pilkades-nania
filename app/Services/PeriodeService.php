@@ -23,8 +23,8 @@ class PeriodeService
                         'cd.id as id_calon_kades',
                         'cd.nama',
                         'cd.moto',
-                        DB::raw('CONCAT("' . env('APP_URL') . '", cd.foto) AS foto'),
-                        // 'cd.foto'
+                        // DB::raw('CONCAT("' . env('APP_URL') . '", cd.foto) AS foto'),
+                        'cd.foto'
                     ]
                 )
                 ->where('p.status', 1)

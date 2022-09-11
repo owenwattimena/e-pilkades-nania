@@ -28,7 +28,7 @@ class CalonKadesService
                 'visi',
                 'misi',
                 'moto',
-                'foto_blob',
+                // 'foto_blob',
                 'foto',
                 // DB::raw('CONCAT("' . env('APP_URL') . '", foto) as foto')
             ];
