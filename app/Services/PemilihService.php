@@ -55,7 +55,7 @@ class PemilihService
                 $pemilih = $pemilih->where($key, '=', $value)
                     ->first();
             }
-            if ($key != null & $all == true) {
+            else if ($key != null & $all == true) {
                 $pemilih = $pemilih->where($key, '=', $value)
                     ->get();
             } else {

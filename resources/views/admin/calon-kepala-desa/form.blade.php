@@ -19,7 +19,8 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="foto">Foto</label>
-                    <input type="file" class="form-control" id="foto" name="foto" {{ isset($required) ? $required : '' }}>
+                    <input type="file" class="form-control" id="foto" name="foto" {{ isset($required) ? $required : '' }} onchange="readURL(this);">
+                    <input type="hidden" name="image_biner" id="image-biner">
                 </div>
             </div>
         </div>
@@ -92,3 +93,37 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
+
+@section('script')
+<script>
+    // function toDataURL(src, callback) {
+    //     var image = new Image();
+    //     image.crossOrigin = 'Anonymous';
+    //     image.onload = function() {
+    //         var canvas = document.createElement('canvas');
+    //         var context = canvas.getContext('2d');
+    //         canvas.height = this.naturalHeight;
+    //         canvas.width = this.naturalWidth;
+    //         context.drawImage(this, 0, 0);
+    //         var dataURL = canvas.toDataURL('image/jpeg');
+    //         callback(dataURL);
+    //     };
+    //     image.src = src;
+    // }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-biner').val(e.target.result)
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    // toDataURL('https://images.unsplash.com/photo-1606115915090-be18fea23ec7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80', function(dataURL) {
+    //     console.log(dataURL);
+    // })
+
+</script>
+
+@endsection

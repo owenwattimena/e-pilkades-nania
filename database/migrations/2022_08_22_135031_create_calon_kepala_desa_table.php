@@ -26,7 +26,7 @@ class CreateCalonKepalaDesaTable extends Migration
             $table->string('misi');
             $table->string('moto');
             $table->string('foto');
-            $table->binary('foto_blob')->nullable();
+            $table->longText('foto_blob')->nullable();
             $table->timestamps();
         });
     }

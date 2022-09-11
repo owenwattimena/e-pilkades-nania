@@ -58,9 +58,23 @@
                                     <td> <span class="badge bg-{{ $data->status == 0 ? 'black' : 'green' }}">{{ $data->status == 0 ? 'Tidak Aktif' : 'Aktif' }}</span> </td>
                                     <td>
                                         <a href="{{ route('periode.calonKepalaDesa', $data->id) }}" class="btn btn-xs btn-info">DAFTAR CALON</a>
-                                        <button class="btn btn-xs bg-green">AKTIFKAN</button>
-                                        <button class="btn btn-xs bg-orange">UBAH</button>
-                                        <button class="btn btn-xs bg-red">HAPUS</button>
+                                        {{-- <button class="btn btn-xs bg-orange">UBAH</button> --}}
+                                        <form action="{{ route('periode.status', $data->id) }}" style="display: initial;" method="POST">
+                                            @csrf
+                                            @method('post')
+                                            @if ($data->status <= 0)
+                                            <button class="btn btn-xs bg-green" onclick="return confirm('Yakin ingin aktifkan periode?')">AKTIFKAN</button>
+                                            
+                                            @else
+                                            <button class="btn btn-xs bg-black" onclick="return confirm('Yakin ingin menonaktifkan periode?')">NONAKTIFKAN</button>
+                                                
+                                            @endif
+                                        </form>
+                                        <form action="{{ route('periode.delete', $data->id) }}" style="display: initial;" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-xs bg-red" onclick="return confirm('Yakin ingin menghapus data?')">HAPUS</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

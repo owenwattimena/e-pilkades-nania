@@ -43,7 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                $@php
+                                @php
                                     $no = 0;
                                 @endphp
                                 @foreach ($calonKades as $data)

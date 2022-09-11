@@ -79,7 +79,11 @@
                                     <td>{{ $data->nama }}</td>
                                     <td>{{ $data->moto }}</td>
                                     <td>
-                                        <button class="btn btn-xs bg-red">HAPUS</button>
+                                        <form action="{{ route('periode.calkades-periode.hapus', $data->id) }}" style="display: initial;" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-xs bg-red" onclick="return confirm('Yakin ingin menghapus data?')">HAPUS</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

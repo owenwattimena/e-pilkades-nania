@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Helpers\ArrayResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Helpers\ArrayResponse;
+use App\Helpers\AlertFormatter;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class PeriodeService
@@ -61,10 +62,10 @@ class PeriodeService
         try {
 
             $result = DB::table('periode_pemilihan')
-            ->select([
-                'id', 'masa_jabatan', 'tanggal_pemilihan', 'jam_mulai_pemilihan', 'jam_selesai_pemilihan', 'status'
-            ])
-            ->where('status', 1)->first();
+                ->select([
+                    'id', 'masa_jabatan', 'tanggal_pemilihan', 'jam_mulai_pemilihan', 'jam_selesai_pemilihan', 'status'
+                ])
+                ->where('status', 1)->first();
 
             if ($result) {
                 return ArrayResponse::success('Data Periode', $result);
@@ -142,6 +143,69 @@ class PeriodeService
             return ArrayResponse::error('Registrasi calojn kades gagal.');
         } catch (\Exception $e) {
             return ArrayResponse::error('Error. ' . $e->getMessage());
+        }
+    }
+
+    public static function hapus($id)
+    {
+        try {
+            $delete = DB::table('periode_pemilihan')->where('id', $id)->delete();
+
+            if ($delete > 0) return AlertFormatter::success("Data berhasil di dihapus!");
+
+            return AlertFormatter::warning("Data gagal di dihapus!");
+        } catch (\Exception $e) {
+            return AlertFormatter::danger("Error. " . $e->getMessage());
+        }
+    }
+
+    public static function status($id)
+    {
+        try {
+            $data = DB::table('periode_pemilihan')->where('id', $id)->first();
+            DB::beginTransaction();
+            // jika status = aktif
+            if ($data->status == 1) {
+                if (DB::table('periode_pemilihan')->where('id', $id)->update([
+                    'status' => 0
+                ]) > 0) {
+                    DB::commit();
+                    return AlertFormatter::success("Status berhasil di ubah!");
+                }
+                DB::rollBack();
+                return AlertFormatter::warning("Status gagal di ubah!");
+            }
+            // jika status = tidak aktif
+            else {
+                $nonaktif = DB::table('periode_pemilihan')->where('status', 1)->update([
+                    'status' => 0
+                ]);
+
+                if (DB::table('periode_pemilihan')->where('id', $id)->update([
+                    'status' => 1
+                ]) > 0) {
+                    DB::commit();
+                    return AlertFormatter::success("Status berhasil di ubah!");
+                }
+
+                DB::rollBack();
+                return AlertFormatter::warning("Status gagal di ubah!");
+            }
+        } catch (\Throwable $e) {
+            return AlertFormatter::danger("Error. " . $e->getMessage());
+        }
+    }
+
+    public static function hapusCalkades($id)
+    {
+        try {
+            $delete = DB::table('calon_kades_periode_pemilihan')->where('id', $id)->delete();
+
+            if ($delete > 0) return AlertFormatter::success("Data berhasil di dihapus!");
+
+            return AlertFormatter::warning("Data gagal di dihapus!");
+        } catch (\Exception $e) {
+            return AlertFormatter::danger("Error. " . $e->getMessage());
         }
     }
 }

@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Helpers\ArrayResponse;
 use App\Helpers\AlertFormatter;
 use Illuminate\Support\Facades\DB;
-use Image;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Response;
-
+use Illuminate\Support\Facades\Input;
 class CalonKadesService
 {
 
@@ -28,6 +28,7 @@ class CalonKadesService
                 'visi',
                 'misi',
                 'moto',
+                'foto_blob',
                 DB::raw('CONCAT("' . env('APP_URL') . '", foto) as foto')
             ];
             if ($id <= 0) {
@@ -55,6 +56,9 @@ class CalonKadesService
                 $image->move(public_path('/foto'), $image_name);
 
                 $image_path = "/foto/" . $image_name;
+
+                $imageBiner = $request->image_biner;
+
 
 
                 // $imageBiner = Image::make($request->file('foto'));

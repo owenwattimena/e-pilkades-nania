@@ -43,9 +43,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('hapus/{id}', [CalonKadesController::class, 'delete'])->name('calkades.delete');
 
     });
-    Route::get('/calon-kepala-desa/{id}', function ($id) {
-        echo $id;
-    })->name('calkades1');
+    // Route::get('/calon-kepala-desa/{id}', function ($id) {
+    //     echo $id;
+    // })->name('calkades1');
 
     Route::prefix('pemilih')->group(function () {
         Route::get('/', [PemilihController::class, 'index'])->name('pemilih');
@@ -59,6 +59,9 @@ Route::middleware('auth')->group(function () {
         Route::get('{id}/daftar-calon/', [PeriodeController::class, 'calonKepalaDesa'])->name('periode.calonKepalaDesa');
         Route::post('{id}/daftar-calon/', [PeriodeController::class, 'registrasiCalonKades'])->name('periode.calonKepalaDesa.registrasi');
         Route::post('/', [PeriodeController::class, 'create'])->name('periode.create');
+        Route::delete('{id}/hapus', [PeriodeController::class, 'delete'])->name('periode.delete');
+        Route::post('{id}/status', [PeriodeController::class, 'status'])->name('periode.status');
+        Route::delete('calkades-periode/{id}', [PeriodeController::class, 'deleteCalkades'])->name('periode.calkades-periode.hapus');
     });
     Route::get('/user', function () {
         // return view('admin.login');

@@ -54,6 +54,7 @@
         <div class="box-body">
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
+                    @if (isset($periode->masa_jabatan))
                     <strong>Perolehan Suara</strong>
                     <address>
                         Periode {{ $periode->masa_jabatan }}<br>
@@ -61,6 +62,7 @@
                         Jam Pemilihan {{ $periode->jam_mulai_pemilihan }} s/d {{ $periode->jam_selesai_pemilihan }}<br>
                         Jumlah Peserta Pemilih
                     </address>
+                    @endif
                 </div>
             </div>
             <table class="table">
@@ -72,6 +74,19 @@
                     <th>Jumlah Suara</th>
                     <th>Persentase</th>
                 </thead>
+                <tbody>
+                    @php
+                    $no = 0;
+                    @endphp
+                    @foreach ($pemilihan as $item)
+                    <td>{{ ++$no }}</td>
+                    <td>{{ $item->nomor_urut }}</td>
+                    <td>{{ $item->nama }}</td>
+                    <td>{{ $item->moto }}</td>
+                    <td>{{ $item->jumlah_suara }}</td>
+                    <td>{{ $item->jumlah_suara / $terverifikasi * 100 }}%</td>
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>

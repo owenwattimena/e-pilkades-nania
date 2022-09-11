@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Services\PemilihService;
 use App\Services\PeriodeService;
-use Illuminate\Http\Request;
+use App\Services\PemilihanService;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -17,7 +18,9 @@ class DashboardController extends Controller
         $data['terverifikasi'] = count($pemilihTerverifkasi['data']);
 
         $periode = PeriodeService::periodeAktif();
+        $pemilihan = PemilihanService::hasilPemilihan();
         $data['periode'] = $periode['data'];
+        $data['pemilihan'] = $pemilihan['data'];
         // dd($data);
         return view('admin.dashboard', $data);
     }

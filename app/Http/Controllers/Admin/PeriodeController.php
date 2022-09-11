@@ -53,4 +53,21 @@ class PeriodeController extends Controller
             return redirect()->back()->with(AlertFormatter::success($registerCalonKades['message']));
         return redirect()->back()->with(AlertFormatter::danger($registerCalonKades['message']));
     }
+
+    public function delete(Request $request, $id)
+    {
+        $result = PeriodeService::hapus($id);
+        return redirect()->back()->with($result);
+    }
+
+    public function status(Request $request, $id)
+    {
+        $result = PeriodeService::status($id);
+        return redirect()->back()->with($result);
+    }
+    public function deleteCalkades(Request $request, $id)
+    {
+        $result = PeriodeService::hapusCalkades($id);
+        return redirect()->back()->with($result);
+    }
 }
