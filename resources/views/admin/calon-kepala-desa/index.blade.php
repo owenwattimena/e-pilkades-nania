@@ -46,7 +46,6 @@
                                 @php
                                 $no = 0;
                                 @endphp
-                                @if ($calonKades != null)
                                 @foreach ($calonKades as $data)
                                 <tr>
                                     <td>{{ ++$no}}</td>
@@ -65,7 +64,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                @endif
                             </tbody>
                         </table>
                     </div>
