@@ -45,7 +45,6 @@
                             <tbody>
                                 @php
                                 $no = 0;
-                                dump($calonKades);
                                 @endphp
                                 @foreach ($calonKades as $data)
                                 <tr>
