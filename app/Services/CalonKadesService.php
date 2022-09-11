@@ -29,7 +29,8 @@ class CalonKadesService
                 'misi',
                 'moto',
                 'foto_blob',
-                DB::raw('CONCAT("' . env('APP_URL') . '", foto) as foto')
+                'foto',
+                // DB::raw('CONCAT("' . env('APP_URL') . '", foto) as foto')
             ];
             if ($id <= 0) {
                 $result = DB::table('calon_kepala_desa')->select($select)->get();
