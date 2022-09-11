@@ -48,9 +48,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $no = 0;
+                                @endphp
                                 @foreach ($periode as $data)
                                 <tr>
-                                    <td>{{ $data->id }}</td>
+                                    <td>{{ ++$no }}</td>
                                     <td>{{ $data->masa_jabatan }}</td>
                                     <td>{{ $data->tanggal_pemilihan }}</td>
                                     <td>{{ $data->jam_mulai_pemilihan }}</td>

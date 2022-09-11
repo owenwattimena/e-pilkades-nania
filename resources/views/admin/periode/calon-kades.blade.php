@@ -71,9 +71,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $no = 0;
+                                @endphp
                                 @foreach ($calonKadesPeriode as $data)
                                 <tr>
-                                    <td>{{ $data->id }}</td>
+                                    <td>{{ ++$no }}</td>
                                     <td><img src="{{ asset($data->foto) }}" width="30" alt=""></td>
                                     <td>{{ $data->nomor_urut }}</td>
                                     <td>{{ $data->nama }}</td>
