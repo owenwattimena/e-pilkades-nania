@@ -79,12 +79,14 @@
                     $no = 0;
                     @endphp
                     @foreach ($pemilihan as $item)
-                    <td>{{ ++$no }}</td>
-                    <td>{{ $item->nomor_urut }}</td>
-                    <td>{{ $item->nama }}</td>
-                    <td>{{ $item->moto }}</td>
-                    <td>{{ $item->jumlah_suara }}</td>
-                    <td>{{ $terverifikasi != 0 ? ($item->jumlah_suara / $terverifikasi * 100) : 0 }}%</td>
+                    <tr>
+                        <td>{{ ++$no }}</td>
+                        <td>{{ $item->nomor_urut }}</td>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->moto }}</td>
+                        <td>{{ $item->jumlah_suara }}</td>
+                        <td>{{ $terverifikasi != 0 ? ($item->jumlah_suara / $terverifikasi * 100) : 0 }}%</td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
