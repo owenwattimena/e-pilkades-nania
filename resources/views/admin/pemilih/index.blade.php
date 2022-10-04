@@ -31,7 +31,7 @@
                         <a href="{{ route('calkades.tambah') }}" class="btn btn-primary" style="border-radius: 0; margin-bottom: 15px;">TAMBAH</a>
                     </div>
                     <div class="table-responsive">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="table" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th style="width:30px;">No</th>
@@ -43,9 +43,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $no = 0;
+                                @endphp
                                 @foreach ($pemilih as $data)
                                 <tr>
-                                    <td>{{ $data->id }}</td>
+                                    <td>{{ ++$no }}</td>
                                     <td>{{ $data->nik }}</td>
                                     <td>{{ $data->nama }}</td>
                                     {{-- <td>{{ $data->nik }}</td> --}}
@@ -72,4 +75,7 @@
 <!-- DataTables -->
 <script src="{{ asset('assets') }}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('assets') }}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script>
+    $('#table').DataTable();
+</script>
 @endsection
