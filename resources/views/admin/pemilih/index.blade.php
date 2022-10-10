@@ -76,6 +76,8 @@
 <script src="{{ asset('assets') }}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('assets') }}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
-    $('#table').DataTable();
+    $('#table').DataTable(
+        {paging:false}
+    );
 </script>
 @endsection
