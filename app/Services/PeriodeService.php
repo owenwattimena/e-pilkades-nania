@@ -104,7 +104,7 @@ class PeriodeService
                     'status' => 0
                 ]);
 
-                if ($nonaktifkanStatus == false)
+                if ($nonaktifkanStatus > 0)
                     return ArrayResponse::error("Gagal menonaktifkan status periode.");
             }
 
