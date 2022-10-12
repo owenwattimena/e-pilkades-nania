@@ -63,19 +63,20 @@ class PemilihanService
                 ->leftJoin('periode_pemilihan AS pp', 'pp.id', 'ckp.periode_pemilihan_id')
                 ->leftJoin('calon_kepala_desa AS ckd', 'ckd.id', 'ckp.calon_kades_id')
                 ->where('pp.status', 1)
+                ->distinct()
                 ->get();
-                $result->map(function($item){
-                    $suara = DB::table('hasil_pemilihan AS hp')
-                        ->select(DB::raw('COUNT(*) as jumlah_suara'))
-                        ->join('calon_kades_periode_pemilihan AS ckp', 'hp.calon_kades_periode_pemilihan_id', 'ckp.id')
-                        ->join('periode_pemilihan AS pp', 'pp.id', 'ckp.periode_pemilihan_id')
-                        ->where('hp.calon_kades_periode_pemilihan_id', $item->id)
-                        ->first();
-                    $item->jumlah_suara = $suara->jumlah_suara;
-                    return $item;
-                });
-                $result = $result->sortByDesc('jumlah_suara')->values();
-                return ArrayResponse::success('Hasil Pemilihan!', $result);
+            $result->map(function($item){
+                $suara = DB::table('hasil_pemilihan AS hp')
+                    ->select(DB::raw('COUNT(*) as jumlah_suara'))
+                    ->join('calon_kades_periode_pemilihan AS ckp', 'hp.calon_kades_periode_pemilihan_id', 'ckp.id')
+                    ->join('periode_pemilihan AS pp', 'pp.id', 'ckp.periode_pemilihan_id')
+                    ->where('hp.calon_kades_periode_pemilihan_id', $item->id)
+                    ->first();
+                $item->jumlah_suara = $suara->jumlah_suara;
+                return $item;
+            });
+            $result = $result->sortByDesc('jumlah_suara')->values();
+            return ArrayResponse::success('Hasil Pemilihan!', $result);
         } catch (\Exception $e) {
             return ArrayResponse::error('Error. ' . $e->getMessage());
         }
