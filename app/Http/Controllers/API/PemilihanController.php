@@ -39,4 +39,10 @@ class PemilihanController extends Controller
         $result = PemilihanService::hasilPemilihan();
         return JsonResponse::success($result['data'], $result['message']);
     }   
+
+    public function totalSuara()
+    {
+        $result = PemilihanService::totalSuara();
+        return JsonResponse::success($result['data'], $result['message']);
+    }
 }

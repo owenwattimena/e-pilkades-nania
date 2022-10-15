@@ -22,7 +22,6 @@ class PemilihanService
                 ->where('hp.pemilih_id', $request->user()->id)
                 ->where('pp.status', 1)
                 ->exists();
-
             return ArrayResponse::success("Sudah memilih", $pilihan);
         } catch (\Exception $e) {
             return ArrayResponse::error('Error. ' . $e->getMessage());
@@ -53,6 +52,21 @@ class PemilihanService
             return ArrayResponse::error('Error. ' . $e->getMessage());
         }
     }
+
+    static function totalSuara()
+    {
+        try{
+            $result =DB::table('hasil_pemilihan AS hp')
+                ->select(DB::raw('COUNT(*) as jumlah_suara'))
+                ->join('calon_kades_periode_pemilihan AS ckpp', 'hp.calon_kades_periode_pemilihan_id', 'ckpp.id')
+                ->join('periode_pemilihan AS pp', 'ckpp.periode_pemilihan_id', 'pp.id')
+                ->where('pp.status', 1)->first();
+            return ArrayResponse::success('Total Suara!', $result);
+        } catch (\Exception $e) {
+            return ArrayResponse::error('Error. ' . $e->getMessage());
+        }
+    }
+
 
     static function hasilPemilihan()
     {

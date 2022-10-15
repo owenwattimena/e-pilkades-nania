@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('pemilihan', [PemilihanController::class, 'pilih']);
         Route::get('pemilihan-check', [PemilihanController::class, 'checkPemilihan']);
         Route::get('hasil-pemilihan', [PemilihanController::class, 'hasilPemilihan']);
+        Route::get('hasil-pemilihan/total-suara', [PemilihanController::class, 'totalSuara']);
         Route::get('user', function(Request $request){
             return JsonResponse::success($request->user(), "User.");
         });
